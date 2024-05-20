@@ -1,10 +1,28 @@
 from landsites import Land
+from math import union
 
 class Mode2Navigator:
     """
-    Student-TODO: short paragraph as per
-    https://edstem.org/au/courses/14293/lessons/46720/slides/318306
+    Mode2Navigator facilitates navigation and decision-making for multiple teams of adventurers in mode 2.
+
+    Approach Details:
+
+    Data Structures and Data Types Used:
+    - The class uses a list to store instances of the Land class representing different sites.
+    - Integers are used to represent the number of teams and the number of adventurers.
+
+    Small Example:
+    navigator = Mode2Navigator(n_teams=3)
+    navigator.add_sites([Land("Forest", guardians=20, gold=100), Land("Mountain", guardians=15, gold=200)])
+    actions = navigator.simulate_day(adventurer_size=10)
+    print(actions)
+
+    Explanation of Complexity:
+    - The select_best_action method iterates through each site and considers the number of adventurers to send.
+    - Best Case: O(T * N) where T is the number of teams and N is the number of sites. This occurs when each team quickly finds an optimal site.
+    - Worst Case: O(T * N * A) where T is the number of teams, N is the number of sites, and A is the maximum number of adventurers. This occurs when each team evaluates all possible numbers of adventurers for each site.
     """
+
 
     def __init__(self, n_teams: int) -> None:
         """
@@ -27,7 +45,7 @@ class Mode2Navigator:
         self.sites.extend(sites)
 
 
-    def select_best_action(self, remaining_adventurers: int, sites: List[Land]) -> Tuple[Union[Land, None], int, float]:
+    def select_best_action(self, remaining_adventurers: int, sites: list[Land]) -> tuple[Land | None, int, float]:
         best_score = 2.5 * remaining_adventurers
         best_action = (None, 0, best_score)  # (site, adventurers, score)
 
