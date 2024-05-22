@@ -46,6 +46,15 @@ class Mode2Navigator:
 
 
     def select_best_action(self, remaining_adventurers: int, sites: list[Land]) -> tuple[Land | None, int, float]:
+        """
+        The select_best_action method iterates through each site and considers the number of adventurers to send.
+        Best Case: 
+            O(T * N) where T is the number of teams and N is the number of sites. 
+            This occurs when each team quickly finds an optimal site.
+        Worst Case: 
+            O(T * N * A) where T is the number of teams, N is the number of sites, and A is the maximum number of adventurers. 
+            This occurs when each team evaluates all possible numbers of adventurers for each site.
+        """
         best_score = 2.5 * remaining_adventurers
         best_action = (None, 0, best_score)  # (site, adventurers, score)
 
